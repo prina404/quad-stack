@@ -182,13 +182,15 @@ A separate set of SLAM and navigation parameters for exploration are available:
 If you use this in your work please cite
 
 ```bibtex
-@misc{aditya2025robustlocalizationmappingnavigation,
-      title={Robust Localization, Mapping, and Navigation for Quadruped Robots}, 
-      author={Dyuman Aditya and Junning Huang and Nico Bohlinger and Piotr Kicki and Krzysztof Walas and Jan Peters and Matteo Luperto and Davide Tateo},
-      year={2025},
-      eprint={2505.02272},
-      archivePrefix={arXiv},
-      primaryClass={cs.RO},
-      url={https://arxiv.org/abs/2505.02272}, 
+@INPROCEEDINGS{11163249,
+  author={Aditya, Dyuman and Huang, Junning and Bohlinger, Nico and Kicki, Piotr and Walas, Krzysztof and Peters, Jan and Luperto, Matteo and Tateo, Davide},
+  booktitle={2025 European Conference on Mobile Robots (ECMR)}, 
+  title={Robust Localization, Mapping, and Navigation for Quadruped Robots}, 
+  year={2025},
+  volume={},
+  number={},
+  pages={1-8},
+  keywords={Location awareness;Accuracy;Navigation;Pipelines;Reinforcement learning;Robot sensing systems;Stability analysis;Sensors;Quadrupedal robots;Robots},
+  doi={10.1109/ECMR65884.2025.11163249}}
 }
 ```
