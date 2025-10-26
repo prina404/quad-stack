@@ -182,7 +182,7 @@ A separate set of SLAM and navigation parameters for exploration are available:
 If you use this in your work please cite
 
 ```bibtex
-@INPROCEEDINGS{11163249,
+@INPROCEEDINGS{adityaRobustQuad2025,
   author={Aditya, Dyuman and Huang, Junning and Bohlinger, Nico and Kicki, Piotr and Walas, Krzysztof and Peters, Jan and Luperto, Matteo and Tateo, Davide},
   booktitle={2025 European Conference on Mobile Robots (ECMR)}, 
   title={Robust Localization, Mapping, and Navigation for Quadruped Robots}, 
