@@ -43,6 +43,12 @@ def generate_launch_description():
         description='Z position of the robot at start'
     )
 
+    yaw_pose_arg = DeclareLaunchArgument(
+        'yaw',
+        default_value='0.0',
+        description='Yaw orientation of the robot at start'
+    )
+
     spawn_bringup_include_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(spawn_bringup_launch),
         launch_arguments={
@@ -51,6 +57,7 @@ def generate_launch_description():
             'x_pose': LaunchConfiguration('x_pose'),
             'y_pose': LaunchConfiguration('y_pose'),
             'z_pose': LaunchConfiguration('z_pose'),
+            'yaw': LaunchConfiguration('yaw'),
         }.items()
     )
 
@@ -154,13 +161,14 @@ def generate_launch_description():
         x_pose_arg,
         y_pose_arg,
         z_pose_arg,
+        yaw_pose_arg,
         spawn_bringup_include_launch,
         mab_robot_state_publisher,
         unitree_robot_state_publisher,
         delay_stand_node,
         mab_delay_policy_node,
         unitree_delay_policy_node,
-        teleop_node
+        #teleop_node
     ])
 
 if __name__ == '__main__':

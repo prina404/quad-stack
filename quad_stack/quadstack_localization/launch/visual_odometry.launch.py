@@ -40,6 +40,11 @@ def generate_launch_description():
         default_value='0.1',
         description='Z position of the robot at start'
     )
+    yaw_pose_arg = DeclareLaunchArgument(
+        'yaw',
+        default_value='0.0',
+        description='Yaw orientation of the robot at start'
+    )
     
     use_kinematics_odom_arg = DeclareLaunchArgument(
         'use_kinematics_odom',
@@ -199,6 +204,7 @@ def generate_launch_description():
         x_pose_arg,
         y_pose_arg,
         z_pose_arg,
+        yaw_pose_arg,
         use_kinematics_odom_arg,
         rtabmap,
         # odom_gt,

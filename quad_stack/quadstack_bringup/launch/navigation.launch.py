@@ -69,6 +69,12 @@ def generate_launch_description():
         default_value='0.1',
         description='Z position of the robot at start'
     )
+
+    yaw_pose_arg = DeclareLaunchArgument(
+        'yaw',
+        default_value='0.0',
+        description='Yaw orientation of the robot at start'
+    )
     
     odom_gt_arg = DeclareLaunchArgument(
         'odom_gt',
@@ -128,6 +134,7 @@ def generate_launch_description():
             'x_pose': LaunchConfiguration('x_pose'),
             'y_pose': LaunchConfiguration('y_pose'),
             'z_pose': LaunchConfiguration('z_pose'),
+            'yaw': LaunchConfiguration('yaw'),
             'robot': LaunchConfiguration('robot'),
             'use_kinematics_odom': LaunchConfiguration('use_kinematics_odom'),
             'rosbag': LaunchConfiguration('rosbag'),
@@ -222,6 +229,7 @@ def generate_launch_description():
         x_pose_arg,
         y_pose_arg,
         z_pose_arg,
+        yaw_pose_arg,
         odom_gt_arg,
 
         silver_badger_real_robot_relay,

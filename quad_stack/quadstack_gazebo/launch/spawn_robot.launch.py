@@ -53,13 +53,15 @@ def generate_launch_description():
     robot = LaunchConfiguration('robot', default='silver_badger')
     x_pose = LaunchConfiguration('x_pose', default='-2.0')
     y_pose = LaunchConfiguration('y_pose', default='3.5')
-    z_pose = LaunchConfiguration('z_pose', default='0.1')
+    z_pose = LaunchConfiguration('z_pose', default='0.2')
+    yaw_param = LaunchConfiguration('yaw', default='0.0')
+    
     
     # For some robots the z_pose needs to be adjusted
     z_pose_sub = PythonExpression([
         "str(max(float('", LaunchConfiguration('z_pose'), "'), 0.5)) "
         "if '", LaunchConfiguration('robot'), "' in ['a1', 'go1', 'go2'] "
-        "else '", LaunchConfiguration('z_pose'), "'"
+        "else '", z_pose, "'"
     ])
 
     # gazebo_env_variable = SetEnvironmentVariable('GAZEBO_MODEL_PATH', sb_description_pkg_share)
@@ -99,7 +101,7 @@ def generate_launch_description():
         package='gazebo_ros',
         executable='spawn_entity.py',
         # arguments=['-entity', robot, '-file', urdf_paths['silver_badger'], '-x', x_pose, '-y', y_pose, '-z', z_pose],
-        arguments=['-entity', robot, '-topic', '/robot_description', '-x', x_pose, '-y', y_pose, '-z', z_pose_sub],
+        arguments=['-entity', robot, '-topic', '/robot_description', '-x', x_pose, '-y', y_pose, '-z', z_pose_sub, '-Y', yaw_param],
         output='screen',
         parameters=[
             {'use_sim_time': True},

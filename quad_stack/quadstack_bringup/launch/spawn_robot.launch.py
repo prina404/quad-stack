@@ -41,6 +41,12 @@ def generate_launch_description():
         description='Z position of the robot at start'
     )
 
+    yaw_pose_arg = DeclareLaunchArgument(
+        'yaw',
+        default_value='0.0',
+        description='Yaw orientation of the robot at start'
+    )
+
     gazebo_include_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(gazebo_launch),
         launch_arguments={
@@ -49,6 +55,7 @@ def generate_launch_description():
             'x_pose': LaunchConfiguration('x_pose'),
             'y_pose': LaunchConfiguration('y_pose'),
             'z_pose': LaunchConfiguration('z_pose'),
+            'yaw': LaunchConfiguration('yaw'),
         }.items()
     )
 
@@ -59,6 +66,7 @@ def generate_launch_description():
         x_pose_arg,
         y_pose_arg,
         z_pose_arg,
+        yaw_pose_arg,
         gazebo_include_launch,
     ])
 
