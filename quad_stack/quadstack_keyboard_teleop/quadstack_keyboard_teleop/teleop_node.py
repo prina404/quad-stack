@@ -26,6 +26,7 @@ class TeleopNode(Node):
         self.zero_twist = Twist()
         self.zero_twist.linear.x = 0.0
         self.zero_twist.angular.z = 0.0
+        self.holonomic = False
 
         self.current_x = 0.0
         self.current_y = 0.0
@@ -62,12 +63,18 @@ class TeleopNode(Node):
                         self.current_x = 0.0
                         self.current_y = 0.0
                     twist.linear.x = float(self.current_x)
-                    twist.angular.z = float(self.current_y)
+                    if self.holonomic:
+                        twist.linear.y = float(self.current_y)
+                    else:
+                        twist.angular.z = float(self.current_y)
+                        
                     self.get_logger().info(f'Linear: {twist.linear.x}, Angular: {twist.angular.z}')
                     self.publisher_.publish(twist)
                     self.key_pressed = True
                     if key == 'q':
                         break
+                elif key == 'h':
+                    self.holonomic = True
                 elif key:
                     self.get_logger().info('Unknown key pressed')
         except Exception as e:
