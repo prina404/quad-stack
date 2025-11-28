@@ -31,7 +31,7 @@ controller_server:
     use_sim_time: True
     controller_frequency: 50.0
     min_x_velocity_threshold: 0.001
-    min_y_velocity_threshold: 0.5
+    min_y_velocity_threshold: 0.001
     min_theta_velocity_threshold: 0.001
     failure_tolerance: 0.3
     progress_checker_plugins: ["progress_checker"]
@@ -53,27 +53,28 @@ controller_server:
     general_goal_checker:
       stateful: True
       plugin: "nav2_controller::SimpleGoalChecker"
-      xy_goal_tolerance: 0.4
-      yaw_goal_tolerance: 0.3
+      xy_goal_tolerance: 0.25
+      yaw_goal_tolerance: 0.2
     FollowPath:
       plugin: "dwb_core::DWBLocalPlanner"
       debug_trajectory_details: True
-      min_vel_x: -0.1
-      min_vel_y: -0.1
-      max_vel_x: 0.7
-      max_vel_y: 0.4
-      max_vel_theta: 0.6
+      holonomic: True
+      min_vel_x: -0.2
+      min_vel_y: -0.2
+      max_vel_x: 1.0
+      max_vel_y: 1.0
+      max_vel_theta: 1.0
       min_speed_xy: -0.1
-      max_speed_xy: 0.20
+      max_speed_xy: 0.2
       min_speed_theta: -0.6
       acc_lim_x: 2.5
-      acc_lim_y: 0.5
+      acc_lim_y: 2.5
       acc_lim_theta: 2.0
       decel_lim_x: -2.5
       decel_lim_y: -2.5
       decel_lim_theta: -2.0
       vx_samples: 40
-      vy_samples: 10
+      vy_samples: 20
       vtheta_samples: 20
       sim_time: 1.9
       linear_granularity: 0.05
@@ -92,6 +93,7 @@ controller_server:
       GoalAlign.forward_point_distance: 0.1
       PathDist.scale: 32.0
       GoalDist.scale: 24.0
+      Oscillation.scale: 1.0
       RotateToGoal.scale: 32.0
       RotateToGoal.slowing_factor: 5.0
       RotateToGoal.lookahead_time: -1.0
@@ -183,7 +185,7 @@ global_costmap:
         z_voxels: 16
         max_obstacle_height: 2.0
         mark_threshold: 0
-        observation_sources: pointcloud scan
+        observation_sources: scan
         scan:
           topic: /scan
           max_obstacle_height: 2.0
@@ -213,7 +215,7 @@ map_saver:
 planner_server:
   ros__parameters:
     use_sim_time: true
-    expected_planner_frequency: 20.0
+    expected_planner_frequency: 10.0
     planner_plugins: ["GridBased"]
     GridBased:
       plugin: "nav2_navfn_planner/NavfnPlanner"
@@ -236,7 +238,7 @@ smoother_server:
     costmap_topic: global_costmap/costmap_raw
     footprint_topic: global_costmap/published_footprint
     robot_base_frame: base_link
-    transform_timeout: 0.1
+    transform_timeout: 0.2
     smoother_plugins: ["simple_smoother"]
     simple_smoother:
       plugin: "nav2_smoother::SimpleSmoother"
@@ -265,7 +267,7 @@ behavior_server:
     local_frame: odom
     global_frame: map
     robot_base_frame: base_link
-    transform_tolerance: 0.1
+    transform_tolerance: 0.2
     simulate_ahead_time: 2.0
     max_rotational_vel: 0.8
     min_rotational_vel: 0.3
@@ -283,20 +285,20 @@ waypoint_follower:
       enabled: True
       waypoint_pause_duration: 200
 
-# velocity_smoother:
-#   ros__parameters:
-#     use_sim_time: true
-#     smoothing_frequency: 20.0
-#     scale_velocities: False
-#     feedback: "OPEN_LOOP"
-#     max_velocity: [0.3, 0.0, 1.0]
-#     min_velocity: [-0.15, 0.0, -1.0]
-#     max_accel: [0.5, 0.0, 1.0]
-#     max_decel: [-0.5, 0.0, -1.0]
-#     odom_topic: "odom"
-#     odom_duration: 0.1
-#     deadband_velocity: [0.0, 0.0, 0.0]
-#     velocity_timeout: 1.0
+velocity_smoother:
+  ros__parameters:
+    use_sim_time: true
+    smoothing_frequency: 10.0
+    scale_velocities: False
+    feedback: "OPEN_LOOP"
+    max_velocity: [0.3, 0.3, 1.0]
+    min_velocity: [-0.15, -0.15, -1.0]
+    max_accel: [0.5, 0.5, 1.0]
+    max_decel: [-0.5, -0.5, -1.0]
+    odom_topic: "odom"
+    odom_duration: 0.1
+    deadband_velocity: [0.0, 0.0, 0.0]
+    velocity_timeout: 1.0
 
 # collision_monitor:
 #   ros__parameters:
