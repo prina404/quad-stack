@@ -237,7 +237,8 @@ def generate_launch_description():
 
         quadstack_bringup_teleop_include_launch,
         delayed_navigation_launch,
-        delayed_localization_vo_launch,
+        #delayed_localization_vo_launch,
+        map_odom_transform_publisher,
         image_rotation,
         rviz,
 

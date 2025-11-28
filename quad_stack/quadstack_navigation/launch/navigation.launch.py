@@ -103,9 +103,13 @@ def generate_launch_description():
         parameters=[{'yaml_filename': LaunchConfiguration('map')}]
     )
 
+    # lifecycle_nodes = PythonExpression([
+    #     "['map_server', 'amcl'] if '", LaunchConfiguration('map'), "' != '' else ['map_server']"
+    # ])
     lifecycle_nodes = PythonExpression([
-        "['map_server', 'amcl'] if '", LaunchConfiguration('map'), "' != '' else ['map_server']"
+        "['map_server'] if '", LaunchConfiguration('map'), "' != '' else ['map_server']"
     ])
+
     use_sim_time = True
     autostart = True
 
@@ -140,7 +144,7 @@ def generate_launch_description():
         map_file_arg,
         # nav2,
         nav2_navigation,
-        nav2_amcl,
+        #nav2_amcl,
         laser,
         map_server,
         life_cycle_manager,
